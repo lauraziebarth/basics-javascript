@@ -1,39 +1,48 @@
 var titulo = document.querySelector(".titulo");
 titulo.textContent = "Aparecida Nutricionista";
 
-var paciente = document.querySelector("#primeiro-paciente");
-var tdPeso = paciente.querySelector(".info-peso");
-var tdAltura = paciente.querySelector(".info-altura");
+var pacientes = document.querySelectorAll(".paciente");
 
-var peso = tdPeso.textContent;
-var altura = tdAltura.textContent;
+for (var i = 0; i < pacientes.length ; i++){
 
-var alturaEhValida = validaAltura(altura) 
-var pesoEhValido = validaPeso(peso);
+    var paciente = pacientes[i];
 
-if (!pesoEhValido) {
-    console.log("Peso inválido!");
-    tdPeso.textContent = "Peso inválido!";
-    pesoEhValido = false;
-    paciente.classList.add("paciente-invalido");
+    var tdPeso = paciente.querySelector(".info-peso");
+    var peso = tdPeso.textContent;
+
+    var tdAltura = paciente.querySelector(".info-altura");
+    var altura = tdAltura.textContent;
+
+    var tdImc = paciente.querySelector(".info-imc")
+
+    var pesoEhValido = validaPeso(peso);
+    var alturaEhValida = validaAltura(altura) 
+
+    if (!pesoEhValido) {
+        console.log("Peso inválido!");
+        tdPeso.textContent = "Peso inválido!";
+        pesoEhValido = false;
+        paciente.classList.add("paciente-invalido");
+    }
+
+    if (!alturaEhValida) {
+        console.log("Altura inválida!");
+        tdAltura.textContent = "Altura inválida!";
+        alturaEhValida = false;
+        paciente.classList.add("paciente-invalido");
+    }
+
+    if (alturaEhValida && pesoEhValido) {
+        var imc = calculaIMC(peso,altura);
+        tdImc.textContent = imc;
+    } else {
+        tdImc.textContent = "Altura e/ou peso inválidos!"
+    }
 }
 
-if (!alturaEhValida) {
-    console.log("Altura inválida!");
-    tdAltura.textContent = "Altura inválida!";
-    alturaEhValida = false;
-    paciente.classList.add("paciente-invalido");
-}
-
-if (alturaEhValida && pesoEhValido) {
-    var imc = calculaIMC(peso,altura);
-    tdImc.textContent = imc;    
-} else {
-    tdImc.textContent = "Altura e/ou peso inválidos!"
-}
 
 function validaPeso(peso){
-    if(peso >= 0 && peso < 1000){
+    if(peso > 0 && peso < 1000){
         return true;
     }else{
         return false;
@@ -41,7 +50,7 @@ function validaPeso(peso){
 }
 
 function validaAltura(altura){
-    if(altura >= 0 && altura <= 3.0){
+    if(altura > 0 && altura <= 3.0){
         return true;
     }else{
         return false;
