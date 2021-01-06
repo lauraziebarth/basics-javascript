@@ -8,6 +8,6 @@ Neste curso aprendemos:
 - [x] Como trabalhar bem com eventos do navegador
 - [x] Como utilizar e validar formulários
 - [x] Boas práticas de organização de código Javascript
-- [ ] Buscar dados em outro servidor com AJAX
+- [x] Buscar dados em outro servidor com AJAX
 
 Carga horária total de 20h.
